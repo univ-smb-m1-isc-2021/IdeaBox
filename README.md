@@ -1,2 +1,3 @@
+### By Arthur Bajt and Léo Laffont
 # IdeaBox
-Widget that allows user feedback on your application
+IdeaBox is a widget that allows user feedback on your applications
