@@ -40,6 +40,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <finalName>idea-box</finalName>
     </build>
 
 </project>
