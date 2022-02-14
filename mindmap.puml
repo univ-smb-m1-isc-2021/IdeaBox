@@ -1,32 +1,36 @@
 @startmindmap
-<style>
-mindmapDiagram {
-  .done {
-    BackgroundColor lightgreen
-  }
-  .wip {
-    BackgroundColor pink
-  }
-}
-</style>
 
-* module
+* Idea Box
 
-** Maven <<wip>>
-** Git
-** Unit Testing
-** Clean Code
-** CI / CD
+** Widget (Connection Token)
+*** Envoie Requête de question
+*** Récupération question
+
 
 left side
 
-** project
-*** Spring
-*** JPA
-*** REST Vs Restful
-*** Hexagonal Architecture
-*** Data Scrapping
-*** Docker
-*** Infra as code
+** Site
+*** Connexion/Inscription
+
+*** Admin
+**** Supprimer client
+**** Voir les stats de IdeaBox
+
+
+*** Client
+**** README implémentation
+
+**** CRUD Application (Création Token)
+
+**** CRUD Campagne
+***** CRUD questions
+****** Défenir récurences
+****** Définir champs
+
+**** Associer une campagne à une app
+
+
+**** Récupérer données pour une app
+**** Récupérer données pour une campagne
 
 @endmindmap
