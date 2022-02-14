@@ -1,0 +1,32 @@
+@startmindmap
+<style>
+mindmapDiagram {
+  .done {
+    BackgroundColor lightgreen
+  }
+  .wip {
+    BackgroundColor pink
+  }
+}
+</style>
+
+* module
+
+** Maven <<wip>>
+** Git
+** Unit Testing
+** Clean Code
+** CI / CD
+
+left side
+
+** project
+*** Spring
+*** JPA
+*** REST Vs Restful
+*** Hexagonal Architecture
+*** Data Scrapping
+*** Docker
+*** Infra as code
+
+@endmindmap
