@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "question_type")
 @Table(name = "Questions")
-public class Question {
+public abstract class Question {
     @Id
     @Column
     @GeneratedValue(strategy=GenerationType.IDENTITY)
