@@ -1,11 +1,12 @@
 package com.example.ideabox.Question;
 
 import com.example.ideabox.Campaign.Campaign;
-import com.example.ideabox.QuestionType.QuestionType;
 
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "question_type")
 @Table(name = "Questions")
 public class Question {
     @Id
@@ -13,11 +14,11 @@ public class Question {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany
+    @OneToOne
     private Campaign campaign;
 
-    @OneToMany
-    private QuestionType questionType;
+    @Column
+    private String sentence;
 
     // A revoir
 }
