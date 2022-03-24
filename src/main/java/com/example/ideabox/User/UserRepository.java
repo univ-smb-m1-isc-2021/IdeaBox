@@ -1,12 +1,14 @@
 package com.example.ideabox.User;
 
-import org.springframework.data.repository.CrudRepository;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends CrudRepository<User, Long>{
+import java.util.List;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByPseudo(String pseudo);
 
-    Optional<User> findById(Long id);
+//    Optional<User> findById(Long id);
 }

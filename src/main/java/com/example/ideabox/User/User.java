@@ -1,4 +1,6 @@
 package com.example.ideabox.User;
+import org.apache.http.annotation.Contract;
+
 import javax.persistence.*;
 
 @Entity
@@ -24,8 +26,8 @@ public class User {
 
 
     public User() {
+        // Pour JPA
     }
-
 
     public User(String email, String pseudo, String lastName, String firstName) {
         this.email = email;
@@ -34,14 +36,6 @@ public class User {
         this.firstName = firstName;
     }
 
-
-    public User(long id, String email, String pseudo, String lastName, String firstName) {
-        this.id = id;
-        this.email = email;
-        this.pseudo = pseudo;
-        this.lastName = lastName;
-        this.firstName = firstName;
-    }
 
 
     public long getId() {
@@ -83,7 +77,6 @@ public class User {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
 
     @Override
     public String toString() {
