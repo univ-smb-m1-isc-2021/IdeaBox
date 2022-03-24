@@ -1,5 +1,4 @@
 package com.example.ideabox.User;
-import org.apache.http.annotation.Contract;
 
 import javax.persistence.*;
 
@@ -9,7 +8,7 @@ public class User {
 
     @Id
     @Column
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -35,7 +34,6 @@ public class User {
         this.lastName = lastName;
         this.firstName = firstName;
     }
-
 
 
     public long getId() {
