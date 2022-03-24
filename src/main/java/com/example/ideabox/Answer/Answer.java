@@ -13,7 +13,7 @@ public class Answer {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany
+    @ManyToOne
     private Question question;
 
     @Column

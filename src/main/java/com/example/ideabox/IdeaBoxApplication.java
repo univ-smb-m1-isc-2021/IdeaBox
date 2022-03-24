@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScans;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-//@ComponentScan("com.example.ideabox.User")
 public class IdeaBoxApplication {
 
     public static void main(String[] args) {
