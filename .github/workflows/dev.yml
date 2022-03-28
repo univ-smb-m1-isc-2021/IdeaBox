@@ -1,10 +1,12 @@
 name: push dev
-  on:
-    push:
-      branches:
-        -dev
 
-  jobs:
+on:
+  push:
+    branches:
+      - dev
+
+
+jobs:
     build:
       name: build developement branch
       runs-on: ubuntu-latest
