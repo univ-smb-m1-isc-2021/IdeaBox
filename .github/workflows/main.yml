@@ -30,4 +30,4 @@ jobs:
             password: ${{ secrets.GITHUB_TOKEN }}
             registry: docker.pkg.github.com
             repository: univ-smb-m1-isc-2021/idea-box/master
-            tags: latest 
+            tags: latest
