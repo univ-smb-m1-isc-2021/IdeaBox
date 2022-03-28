@@ -3,7 +3,7 @@ name: On push on main
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -19,15 +19,17 @@ jobs:
       - name: Maven Build
         #        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         run: mvn -B verify --file pom.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
         run: docker build -t idea-box .
 
       - name: Push to GitHub Packages
-          uses: docker/build-push-action@v1
-          with:
+        uses: docker/build-push-action@v1
+        with:
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
             registry: docker.pkg.github.com
-            repository: univ-smb-m1-isc-2021/chuck-facts/master
+            repository: univ-smb-m1-isc-2021/idea-box/pipo
             tags: latest
