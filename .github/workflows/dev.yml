@@ -15,9 +15,9 @@ jobs:
         - uses: actions/setup-java@v2
           with:
             distribution: 'adopt' # See 'Supported distributions' for available options
-            java-version: '11'
+            java-version: '17'
 
-        - name: Maven Build & Sonar analysis
+        - name: Maven Build
           #        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
           run: mvn -B verify --file pom.xml
 
