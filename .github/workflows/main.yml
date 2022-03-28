@@ -1,0 +1,33 @@
+name: On push on main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: build developement branch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt' # See 'Supported distributions' for available options
+          java-version: '17'
+
+      - name: Maven Build
+        #        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        run: mvn -B verify --file pom.xml
+
+      - name: Build Docker image
+        run: docker build -t idea-box .
+
+      - name: Push to GitHub Packages
+          uses: docker/build-push-action@v1
+          with:
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+            registry: docker.pkg.github.com
+            repository: univ-smb-m1-isc-2021/chuck-facts/master
+            tags: latest

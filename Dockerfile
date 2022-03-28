@@ -1,4 +1,7 @@
-FROM openjdk:11
+FROM openjdk:11-jre-slim
+
+COPY ./target/idea-box.jar .
+
 EXPOSE 8080
-ADD target/idea-box.jar
-ENTRYPOINT ["java", "-jar", "/idea-box.jar"]
+
+CMD ["sh","-c","java -XX:InitialRAMPercentage=50 -XX:MaxRAMPercentage=70  -XshowSettings $JAVA_OPTS -jar idea-box.jar"]
