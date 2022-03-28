@@ -1,3 +1,4 @@
+name: push dev
   on:
     push:
       branches:
