@@ -1,5 +1,7 @@
 package com.example.ideabox.User;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,9 @@ public class User {
     private String email;
 
     @Column
+    private String hashpassword;
+
+    @Column
     private String pseudo;
 
     @Column
@@ -28,13 +33,13 @@ public class User {
         // Pour JPA
     }
 
-    public User(String email, String pseudo, String lastName, String firstName) {
+    public User(String email, String hashpassword, String pseudo, String lastName, String firstName) {
         this.email = email;
+        this.hashpassword = hashpassword;
         this.pseudo = pseudo;
         this.lastName = lastName;
         this.firstName = firstName;
     }
-
 
     public long getId() {
         return id;
@@ -50,6 +55,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getHashpassword() {
+        return hashpassword;
+    }
+
+    public void setHashpassword(String hashpassword) {
+        this.hashpassword = hashpassword;
     }
 
     public String getPseudo() {
@@ -76,11 +89,13 @@ public class User {
         this.firstName = firstName;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
+                ", hashpassword='" + hashpassword + '\'' +
                 ", pseudo='" + pseudo + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +

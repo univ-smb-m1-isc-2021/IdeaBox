@@ -21,7 +21,7 @@ public class UserService {
 
         if (this.userRepository.findAll().isEmpty()){
             this.userRepository.saveAndFlush(
-                    new User("email@email", "RolanJeudeMotNul", "Rolan", "Garos")
+                    new User("email@email", "abcd123456", "RolanJeudeMotNul", "Rolan", "Garos")
             );
         }
     }
