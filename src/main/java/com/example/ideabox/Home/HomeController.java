@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class HomeController {
 
@@ -17,15 +19,13 @@ public class HomeController {
     }
 
     @GetMapping
-    public String home(Model model){
-        model.addAttribute("users",userService.users());
-        return "home";
-    }
-
-    @GetMapping("/profile")
-    public String homeWhenConnected(@ModelAttribute User user, Model model){
-        model.addAttribute("user",user);
-        System.out.println("\n\n\n\n"+user+"\n\n\n\n");
+    public String home(Model model, HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        if(user != null){
+            model.addAttribute("user",user);
+        } else {
+            model.addAttribute("users",userService.users());
+        }
         return "home";
     }
 }
