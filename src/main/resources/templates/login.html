@@ -9,12 +9,14 @@
     <h1>Log in</h1>
 
 
-    <form action="#" th:action="@{/user/login}" th:object="${loginForm}" method="post">
+    <form action="#" th:if="!${session.user}" th:action="@{/user/login}" th:object="${loginForm}" method="post">
         <p> Username : <input type="text" th:field="*{pseudo}"> </p>
         <p> Password : <input type="password" th:field="*{password}"> </p>
 
         <input type="submit" value="Sign in">
     </form>
+
+    <p th:if="${session.user}"> Vous êtes déjà connecté.</p>
 
 </body>
 </html>

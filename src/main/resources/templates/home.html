@@ -6,11 +6,20 @@
 </head>
 <body>
 
+    <div th:if="!${session.user}">
+        <button onclick="window.location.replace('/user/login');">Connexion</button>
+        <button onclick="window.location.replace('/user/signup');">Inscription</button>
+    </div>
+
+    <div th:if="${session.user}">
+        <button onclick="window.location.replace('/user/deconnect');">Déconnexion</button>
+    </div>
+
     <h1>Hello World</h1>
     <ul th:if="${users}">
         <li th:each="user : ${users}" th:text="${user.pseudo}"></li>
     </ul>
-    <ul th:if="${user}">
+    <ul th:if="${session.user}">
         <li th:text="${user.getLastName()}"></li>
         <li th:text="${user.getFirstName}"></li>
         <li th:text="${user.getPseudo()}"></li>

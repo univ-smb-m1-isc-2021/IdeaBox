@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String showLogIn(Model model){
+    public String showLogIn(Model model,HttpServletRequest request){
         model.addAttribute("loginForm",new LoginForm());
         return "login";
     }
@@ -42,5 +42,11 @@ public class UserController {
     @GetMapping("/signup")
     public String showSignUp(){
         return "signup";
+    }
+
+    @GetMapping("/deconnect")
+    public String disconnect(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return "redirect:/";
     }
 }
