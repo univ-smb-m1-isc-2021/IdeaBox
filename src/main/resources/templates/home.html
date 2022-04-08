@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
 
     <div th:if="!${session.user}">
-        <button onclick="window.location.replace('/user/login');">Connexion</button>
-        <button onclick="window.location.replace('/user/signup');">Inscription</button>
+        <button class="button is-success" onclick="window.location.replace('/user/login');">Connexion</button>
+        <button class="button is-info" onclick="window.location.replace('/user/signup');">Inscription</button>
     </div>
 
     <div th:if="${session.user}">
         <button onclick="window.location.replace('/user/deconnect');">Déconnexion</button>
     </div>
 
-    <h1>Hello World</h1>
+    <h1 class="title is-1">Hello World</h1>
     <ul th:if="${users}">
         <li th:each="user : ${users}" th:text="${user.pseudo}"></li>
     </ul>
