@@ -1,6 +1,7 @@
 package com.example.ideabox.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -11,8 +12,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository){
+    private PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> users(){
@@ -21,9 +25,8 @@ public class UserService {
 
     public User findUserForConnection(String pseudo, String password){
         List<User> users = userRepository.findByPseudo(pseudo);
-        String hashedpw = password; //TODO
         for(int i=0; i < users.size(); ++i){
-            if(users.get(i).getHashpassword() == hashedpw){
+            if(passwordEncoder.matches(password,users.get(i).getHashpassword())){
                 return users.get(i);
             }
         }
@@ -36,10 +39,10 @@ public class UserService {
 
         if (this.userRepository.findAll().isEmpty()){
             this.userRepository.saveAndFlush(
-                    new User("email@email", "abcd123456", "RolanJeudeMotNul", "Rolan", "Garos")
+                    new User("email@email", passwordEncoder.encode("abcd123456"), "RolanJeudeMotNul", "Rolan", "Garos")
             );
             this.userRepository.saveAndFlush(
-                    new User("jeanmich@gmail.com", "oui", "JeanMich", "Jean", "Mich")
+                    new User("jeanmich@gmail.com", passwordEncoder.encode("oui"), "JeanMich", "Jean", "Mich")
             );
         }
     }

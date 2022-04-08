@@ -25,6 +25,7 @@ public class HomeController {
     @GetMapping("/profile")
     public String homeWhenConnected(@ModelAttribute User user, Model model){
         model.addAttribute("user",user);
+        System.out.println("\n\n\n\n"+user+"\n\n\n\n");
         return "home";
     }
 }
