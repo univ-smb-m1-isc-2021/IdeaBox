@@ -7,8 +7,14 @@
 <body>
 
     <h1>Hello World</h1>
-
-    <li th:each="user : ${users}" th:text="${user.pseudo}"></li>
-
+    <ul th:if="${users}">
+        <li th:each="user : ${users}" th:text="${user.pseudo}"></li>
+    </ul>
+    <ul th:if="${user}">
+        <li th:text="${user.firstName}"></li>
+        <li th:text="${user.lastName}"></li>
+        <li th:text="${user.pseudo}"></li>
+        <li th:text="${user.email}"></li>
+    </ul>
 </body>
 </html>

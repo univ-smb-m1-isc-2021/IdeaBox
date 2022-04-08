@@ -13,19 +13,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
 
+    private final UserService userService;
+
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
+
     @GetMapping("/login")
     public String showLogIn(Model model){
-        model.addAttribute("user",new User());
-        model.addAttribute("password", new String());
+        model.addAttribute("loginForm",new LoginForm());
         return "login";
     }
 
     @PostMapping("/login")
-    public String submitLogIn(@ModelAttribute User user, @ModelAttribute String password, Model model){
-        user.setHashpassword(password);
+    public String submitLogIn(@ModelAttribute LoginForm loginForm, Model model){
+        System.out.println("\n\n\n\npseudo : "+loginForm.getPseudo()+"\n\n\n\n");
+        User user = userService.findUserForConnection(loginForm.getPseudo(),loginForm.getPassword());
+        if(user == null){
+            return "login";
+        }
         model.addAttribute("user",user);
         //Verif dans la bdd
-        return "home";
+        return "redirect:/profile";
     }
 
     @GetMapping("/signup")
