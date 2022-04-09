@@ -17,9 +17,13 @@ public class Campaign {
     @Column
     private String name;
 
+    @ManyToOne
+    private User user;
+
     public Campaign() {}
 
-    public Campaign(String name) {
+    public Campaign(String name, User user) {
         this.name = name;
+        this.user = user;
     }
 }
