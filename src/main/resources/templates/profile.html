@@ -11,11 +11,21 @@
 
     <h2 class="title is-2">Vos Applications</h2>
 
-
+    <div id="apps_container">
+        <div class="container card mt-3" th:each="app:${apps}">
+            <div th:text="${app.name}"></div>
+            <div th:text="${app.token}"></div>
+            <div th:text="${app.campaign.name}"></div>
+        </div>
+    </div>
 
     <h2 class="title is-2">Vos Campagnes</h2>
 
-
+    <div id="campaigns_container">
+        <div class="container mt-3" th:each="campaign:${campaigns}">
+            <div th:text="${campaign.name}"></div>
+        </div>
+    </div>
 
 </body>
 </html>

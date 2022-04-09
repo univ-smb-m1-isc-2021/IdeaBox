@@ -1,5 +1,7 @@
 package com.example.ideabox.User;
 
+import com.example.ideabox.Application.Application;
+import com.example.ideabox.Application.ApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,9 +15,10 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+
     private PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public UserService(UserRepository userRepository, ApplicationRepository applicationRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
