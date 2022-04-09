@@ -39,12 +39,11 @@ public class UserService {
 
         if (this.userRepository.findAll().isEmpty()){
             this.userRepository.saveAndFlush(
-                    new User("email@email", passwordEncoder.encode("abcd123456"), "RolanJeudeMotNul", "Rolan", "Garos")
+                    new User("email@email", passwordEncoder.encode("123"), "RG", "Rolan", "Garos")
             );
             this.userRepository.saveAndFlush(
                     new User("jeanmich@gmail.com", passwordEncoder.encode("oui"), "JeanMich", "Jean", "Mich")
             );
         }
     }
-
 }

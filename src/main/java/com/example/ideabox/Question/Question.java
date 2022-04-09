@@ -12,13 +12,35 @@ public abstract class Question {
     @Id
     @Column
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+    protected long id;
 
     @OneToOne
-    private Campaign campaign;
+    protected Campaign campaign;
 
     @Column
-    private String sentence;
+    protected String sentence;
 
-    // A revoir
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Campaign getCampaign() {
+        return campaign;
+    }
+
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
+    }
+
+    public String getSentence() {
+        return sentence;
+    }
+
+    public void setSentence(String sentence) {
+        this.sentence = sentence;
+    }
 }

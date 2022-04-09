@@ -1,5 +1,6 @@
 package com.example.ideabox.Answer;
 
+import com.example.ideabox.Application.Application;
 import com.example.ideabox.Question.Question;
 
 import javax.persistence.*;
@@ -17,8 +18,12 @@ public class Answer {
     private Question question;
 
     @Column
-    private String idFromApp;
-
-    @Column
     private String value;
+
+    public Answer(){}
+
+    public Answer(Question question, String value) {
+        this.question = question;
+        this.value = value;
+    }
 }
