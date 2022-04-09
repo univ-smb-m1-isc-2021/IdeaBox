@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>IdeaBox - Sign Up</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
-<body>
+<body class="p-2">
 
-    <h1>Sign Up</h1>
+    <h1 class="title is-1">Sign Up</h1>
 
-    <form method="post">
-        <p> Username : <input type="text" id="username" name="username"> </p>
-        <p> First Name : <input type="text" id="firstname" name="firstname"> </p>
-        <p> Last Name : <input type="text" id="lastname" name="lastname"> </p>
-        <p> Password : <input type="password" id="password" name="password"> </p>
-        <p> Email : <input type="email" id="email" name="email"> </p>
+    <form action="#" th:if="!${session.user}" th:action="@{/user/signup}" th:object="${signupForm}" method="post">
+        <p> Username : <input class="input" type="text" th:field="${signupForm.pseudo}"> </p>
+        <p> First Name : <input class="input" type="text" th:field="${signupForm.firstName}"> </p>
+        <p> Last Name : <input class="input" type="text" th:field="${signupForm.lastName}"> </p>
+        <p> Password : <input class="input" type="password" th:field="${signupForm.password}"> </p>
+        <p> Confirm password : <input class="input" type="password" th:field="${signupForm.confirmPassword}"> </p>
+        <p> Email : <input class="input" type="text" th:field="${signupForm.email}"> </p>
 
-        <input type="submit" value="Sign up">
+        <input class="button is-success" type="submit" value="Sign up">
     </form>
+
+    <p th:if="${session.user}"> Vous êtes déjà connecté.</p>
 
 </body>
 </html>

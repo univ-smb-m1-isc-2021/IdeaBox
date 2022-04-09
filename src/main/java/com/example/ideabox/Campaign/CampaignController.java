@@ -1,6 +1,7 @@
 package com.example.ideabox.Campaign;
 
 
+import com.example.ideabox.User.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class CampaignController {
     @GetMapping("/new")
     public String showNewCampaingForm(Model model, HttpServletRequest request){
         Campaign campaign = new Campaign();
-        campaign.setUser( request.getSession().getAttribute("user") );
+        campaign.setUser( (User) request.getSession().getAttribute("user") );
         model.addAttribute("campaign", campaign);
         return "new_campaign";
     }

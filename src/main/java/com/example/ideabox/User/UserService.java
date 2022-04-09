@@ -34,7 +34,7 @@ public class UserService {
         return null;
     }
 
-    public void create(User user){
-        this.userRepository.saveAndFlush(user);
+    public void create(String email, String password, String pseudo, String lastName, String firstName){
+        this.userRepository.saveAndFlush(new User(email,passwordEncoder.encode(password),pseudo,lastName,firstName));
     }
 }
