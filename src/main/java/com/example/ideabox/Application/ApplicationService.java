@@ -29,6 +29,6 @@ public class ApplicationService {
     }
 
     public void create(Application app){
-        this.applicationRepository.save(app);
+        this.applicationRepository.saveAndFlush(app);
     }
 }

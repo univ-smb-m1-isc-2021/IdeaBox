@@ -7,15 +7,12 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
-//@Service
-public class CampaignService {/*
+@Service
+public class CampaignService {
     private final CampaignRepository campaignRepository;
 
-    private ApplicationService applicationService;
-
-    public CampaignService(CampaignRepository campaignRepository, ApplicationService applicationService) {
+    public CampaignService(CampaignRepository campaignRepository) {
         this.campaignRepository = campaignRepository;
-        this.applicationService = applicationService;
     }
 
     public List<Campaign> findCampaignByApp(Application app){
@@ -25,17 +22,7 @@ public class CampaignService {/*
         return campaignRepository.findCampaignByName(name);
     }
 
-    @PostConstruct
-    public void initialize(){
-        this.campaignRepository.deleteAllInBatch();
-
-        if (this.campaignRepository.findAll().isEmpty()){
-            this.campaignRepository.saveAndFlush(
-                    new Campaign("CampaignForAppTest1",applicationService.findApplicationByToken("token1"))
-            );
-            this.campaignRepository.saveAndFlush(
-                    new Campaign("CampaignForAppTest2",applicationService.findApplicationByToken("token2"))
-            );
-        }
-    }*/
+    public void create(Campaign campaign){
+        campaignRepository.saveAndFlush(campaign);
+    }
 }

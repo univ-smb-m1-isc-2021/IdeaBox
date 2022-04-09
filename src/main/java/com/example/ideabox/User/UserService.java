@@ -35,6 +35,6 @@ public class UserService {
     }
 
     public void create(User user){
-        this.userRepository.save(user);
+        this.userRepository.saveAndFlush(user);
     }
 }
