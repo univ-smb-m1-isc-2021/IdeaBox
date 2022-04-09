@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String showLogIn(Model model,HttpServletRequest request){
+    public String showLogIn(Model model){
         model.addAttribute("loginForm",new LoginForm());
         return "login";
     }
@@ -33,6 +33,7 @@ public class UserController {
         User user = userService.findUserForConnection(loginForm.getPseudo(),loginForm.getPassword());
         if(user == null){
             model.addAttribute("erreur",true);
+            model.addAttribute("loginForm",new LoginForm());
             return "login";
         }
         request.getSession().setAttribute("user",user);
@@ -40,8 +41,27 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String showSignUp(){
+    public String showSignUp(Model model){
+        model.addAttribute("signupForm",new SignupForm());
         return "signup";
+    }
+
+    @PostMapping("/signup")
+    public String showSignUp(@ModelAttribute SignupForm signupForm, Model model, HttpServletRequest request){
+        if(!signupForm.getPassword().equals(signupForm.getConfirmPassword())){
+            model.addAttribute("erreur",true);
+            model.addAttribute("signupForm",signupForm);
+            return "signup";
+        }
+        userService.create(signupForm.getEmail(),signupForm.getPassword(),signupForm.getPseudo(),signupForm.getLastName(),signupForm.getFirstName());
+        User user = userService.findUserForConnection(signupForm.getPseudo(),signupForm.getPassword());
+        if(user == null){
+            model.addAttribute("erreur",true);
+            model.addAttribute("signupForm",signupForm);
+            return "signup";
+        }
+        request.getSession().setAttribute("user",user);
+        return "redirect:/";
     }
 
     @GetMapping("/deconnect")
