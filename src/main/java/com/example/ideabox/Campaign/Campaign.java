@@ -52,7 +52,6 @@ public class Campaign {
         this.user = user;
     }
 
-
     @Override
     public String toString() {
         return "Campaign{" +
