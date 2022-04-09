@@ -32,7 +32,6 @@ public class UserController {
         System.out.println("\n\n\n\npseudo : "+loginForm.getPseudo()+"\n\n\n\n");
         User user = userService.findUserForConnection(loginForm.getPseudo(),loginForm.getPassword());
         if(user == null){
-            System.out.println("\n\n\n\nNO USER\n\n\n\n");
             model.addAttribute("erreur",true);
             return "login";
         }
