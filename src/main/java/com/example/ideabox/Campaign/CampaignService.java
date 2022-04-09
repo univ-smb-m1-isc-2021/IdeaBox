@@ -24,6 +24,10 @@ public class CampaignService {
         return campaignRepository.findCampaignByName(name);
     }
 
+    public List<Campaign> findCampaignByUser(User user){
+        return campaignRepository.findCampaignByUser(user);
+    }
+
     public Campaign create(Campaign campaign){
         return campaignRepository.save(campaign);
     }

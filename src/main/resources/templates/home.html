@@ -7,13 +7,15 @@
 </head>
 <body class="p-2">
 
-    <div class="has-text-left" th:if="!${session.user}">
-        <button class="button is-success" onclick="window.location.replace('/user/login');">Connexion</button>
-        <button class="ml-2 button is-info" onclick="window.location.replace('/user/signup');">Inscription</button>
-    </div>
-
-    <div class="has-text-left" th:if="${session.user}">
-        <button class="button is-danger" onclick="window.location.replace('/user/deconnect');">Déconnexion</button>
+    <div>
+        <div th:if="${session.user}">
+            <button class="button is-warning" onclick="window.location.replace('/user/profile')">Mon profil</button>
+            <button class="button is-danger" onclick="window.location.replace('/user/disconnect');">Déconnexion</button>
+        </div>
+        <div th:if="!${session.user}">
+            <button class="button is-success" onclick="window.location.replace('/user/login');">Connexion</button>
+            <button class="ml-2 button is-info" onclick="window.location.replace('/user/signup');">Inscription</button>
+        </div>
     </div>
 
     <h1 class="mt-5 title is-1 has-text-centered">IdeaBox</h1>

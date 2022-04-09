@@ -1,6 +1,9 @@
 package com.example.ideabox.User;
 
 
+import com.example.ideabox.Application.ApplicationService;
+import com.example.ideabox.Campaign.Campaign;
+import com.example.ideabox.Campaign.CampaignService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +19,13 @@ public class UserController {
 
 
     private final UserService userService;
+    private final ApplicationService applicationService;
+    private final CampaignService campaignService;
 
-    public UserController(UserService userService){
+    public UserController(UserService userService, ApplicationService applicationService,CampaignService campaignService){
         this.userService = userService;
+        this.applicationService = applicationService;
+        this.campaignService = campaignService;
     }
 
     @GetMapping("/login")
@@ -37,7 +44,7 @@ public class UserController {
             return "login";
         }
         request.getSession().setAttribute("user",user);
-        return "redirect:/";
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/signup")
@@ -61,12 +68,19 @@ public class UserController {
             return "signup";
         }
         request.getSession().setAttribute("user",user);
-        return "redirect:/";
+        return "redirect:/user/profile";
     }
 
-    @GetMapping("/deconnect")
+    @GetMapping("/disconnect")
     public String disconnect(HttpServletRequest request){
         request.getSession().removeAttribute("user");
         return "redirect:/";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model,HttpServletRequest request){
+        model.addAttribute("apps",applicationService.findApplicationByUser((User)request.getSession().getAttribute("user")));
+        model.addAttribute("campaigns",campaignService.findCampaignByUser((User)request.getSession().getAttribute("user")));
+        return "profile";
     }
 }

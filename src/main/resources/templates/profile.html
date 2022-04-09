@@ -7,15 +7,38 @@
 </head>
 <body class="p-2">
 
-    <h1 class="title is-1">Votre profil</h1>
+    <div>
+        <div th:if="${session.user}">
+            <button class="button is-link" onclick="window.location.replace('/')">Accueil</button>
+            <button class="button is-danger" onclick="window.location.replace('/user/disconnect');">Déconnexion</button>
+        </div>
+        <div th:if="!${session.user}">
+            <button class="button is-link" onclick="window.location.replace('/')">Accueil</button>
+            <button class="ml-2 button is-success" onclick="window.location.replace('/user/login');">Connexion</button>
+            <button class="ml-2 button is-info" onclick="window.location.replace('/user/signup');">Inscription</button>
+        </div>
+    </div>
+
+    <h1 class="title is-1 has-text-centered mt-5">Votre profil</h1>
 
     <h2 class="title is-2">Vos Applications</h2>
 
-
+    <div id="apps_container">
+        <div class="container card mt-3" th:each="app:${apps}">
+            <div th:text="${app.name}"></div>
+            <div th:text="${app.token}"></div>
+            <div th:text="${app.campaign.name}"></div>
+        </div>
+    </div>
 
     <h2 class="title is-2">Vos Campagnes</h2>
 
-
+    <div id="campaigns_container">
+        <div th:each="campaign:${campaigns}" th:attr="onclick=|window.location.replace('/campaign/show/${campaign.id}')|"  class="container mt-3">
+            <div th:text="${campaign.name}"></div>
+        </div>
+        <button class="button is-success" th:attr="onclick=|window.location.replace('/campaign/new')|">Ajouter une campagne</button>
+    </button>
 
 </body>
 </html>
