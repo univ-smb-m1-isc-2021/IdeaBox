@@ -5,18 +5,18 @@
     <title>IdeaBox</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
-<body>
+<body class="p-2">
 
-    <div th:if="!${session.user}">
+    <div class="has-text-left" th:if="!${session.user}">
         <button class="button is-success" onclick="window.location.replace('/user/login');">Connexion</button>
-        <button class="button is-info" onclick="window.location.replace('/user/signup');">Inscription</button>
+        <button class="ml-2 button is-info" onclick="window.location.replace('/user/signup');">Inscription</button>
     </div>
 
-    <div th:if="${session.user}">
-        <button onclick="window.location.replace('/user/deconnect');">Déconnexion</button>
+    <div class="has-text-left" th:if="${session.user}">
+        <button class="button is-danger" onclick="window.location.replace('/user/deconnect');">Déconnexion</button>
     </div>
 
-    <h1 class="title is-1">Hello World</h1>
+    <h1 class="mt-5 title is-1 has-text-centered">IdeaBox</h1>
     <ul th:if="${users}">
         <li th:each="user : ${users}" th:text="${user.pseudo}"></li>
     </ul>

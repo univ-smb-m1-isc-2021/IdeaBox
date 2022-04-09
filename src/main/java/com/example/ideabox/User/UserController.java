@@ -33,6 +33,7 @@ public class UserController {
         User user = userService.findUserForConnection(loginForm.getPseudo(),loginForm.getPassword());
         if(user == null){
             System.out.println("\n\n\n\nNO USER\n\n\n\n");
+            model.addAttribute("erreur",true);
             return "login";
         }
         request.getSession().setAttribute("user",user);

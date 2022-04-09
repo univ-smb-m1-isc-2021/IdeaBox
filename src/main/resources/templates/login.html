@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>IdeaBox - Log In</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
 
-    <h1>Log in</h1>
+    <h1 class="title is-1">Log in</h1>
+
+    <p th:if="${erreur}" class="has-text-danger">Vos informations sont érronées.</p>
 
 
     <form action="#" th:if="!${session.user}" th:action="@{/user/login}" th:object="${loginForm}" method="post">

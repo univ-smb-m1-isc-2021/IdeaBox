@@ -1,6 +1,7 @@
 package com.example.ideabox.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,17 +34,7 @@ public class UserService {
         return null;
     }
 
-    @PostConstruct
-    public void initialize(){
-        this.userRepository.deleteAllInBatch();
-
-        if (this.userRepository.findAll().isEmpty()){
-            this.userRepository.saveAndFlush(
-                    new User("email@email", passwordEncoder.encode("123"), "RG", "Rolan", "Garos")
-            );
-            this.userRepository.saveAndFlush(
-                    new User("jeanmich@gmail.com", passwordEncoder.encode("oui"), "JeanMich", "Jean", "Mich")
-            );
-        }
+    public void create(User user){
+        this.userRepository.save(user);
     }
 }
