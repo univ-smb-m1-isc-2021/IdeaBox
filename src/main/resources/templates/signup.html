@@ -7,7 +7,19 @@
 </head>
 <body class="p-2">
 
-    <h1 class="title is-1">Sign Up</h1>
+    <div>
+        <div th:if="${session.user}">
+            <button class="button is-link" onclick="window.location.replace('/')">Accueil</button>
+            <button class="button is-warning" onclick="window.location.replace('/user/profile')">Mon profil</button>
+            <button class="button is-danger" onclick="window.location.replace('/user/disconnect');">Déconnexion</button>
+        </div>
+        <div th:if="!${session.user}">
+            <button class="button is-link" onclick="window.location.replace('/')">Accueil</button>
+            <button class="ml-2 button is-success" onclick="window.location.replace('/user/login');">Connexion</button>
+        </div>
+    </div>
+
+    <h1 class="title is-1 has-text-centered mt-5">Sign Up</h1>
 
     <form action="#" th:if="!${session.user}" th:action="@{/user/signup}" th:object="${signupForm}" method="post">
         <p> Username : <input class="input" type="text" th:field="${signupForm.pseudo}"> </p>

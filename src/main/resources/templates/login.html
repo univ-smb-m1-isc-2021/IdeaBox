@@ -7,7 +7,19 @@
 </head>
 <body class="p-2">
 
-    <h1 class="title is-1">Log in</h1>
+    <div>
+        <div th:if="${session.user}">
+            <button class="button is-link" onclick="window.location.replace('/')">Accueil</button>
+            <button class="button is-warning" onclick="window.location.replace('/user/profile')">Mon profil</button>
+            <button class="button is-danger" onclick="window.location.replace('/user/disconnect');">Déconnexion</button>
+        </div>
+        <div th:if="!${session.user}">
+            <button class="button is-link" onclick="window.location.replace('/')">Accueil</button>
+            <button class="ml-2 button is-info" onclick="window.location.replace('/user/signup');">Inscription</button>
+        </div>
+    </div>
+
+    <h1 class="title is-1 has-text-centered mt-5">Log in</h1>
 
     <p th:if="${erreur}" class="has-text-danger">Vos informations sont érronées.</p>
 
