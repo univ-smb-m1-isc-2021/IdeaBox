@@ -16,6 +16,7 @@ public class Application {
     private long id;
 
     @Column
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String token;
 
     @Column
@@ -32,6 +33,38 @@ public class Application {
     public Application(String token, String name, User user) {
         this.token = token;
         this.name = name;
+        this.user = user;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
         this.user = user;
     }
 

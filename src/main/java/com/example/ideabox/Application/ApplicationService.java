@@ -28,7 +28,9 @@ public class ApplicationService {
         return applicationRepository.findApplicationByToken(token);
     }
 
-    public void create(Application app){
-        this.applicationRepository.saveAndFlush(app);
+    public Application findById(long id){ return applicationRepository.findApplicationById(id); }
+
+    public Application create(Application app){
+        return this.applicationRepository.save(app);
     }
 }

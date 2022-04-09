@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New App</title>
+</head>
+<body>
+
+<h1>New Campaign</h1>
+
+<form action="#" th:action="@{/app/new}" th:object="${form}" method="post">
+    <p> Nom de l'app : <input type="text" th:field="*{name}"> </p>
+
+
+
+    <input type="submit" value="Creer">
+</form>
+
+</body>
+</html>
