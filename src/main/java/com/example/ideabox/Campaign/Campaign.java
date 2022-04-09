@@ -1,5 +1,6 @@
 package com.example.ideabox.Campaign;
 
+import com.example.ideabox.Application.Application;
 import com.example.ideabox.User.User;
 
 import javax.persistence.*;
@@ -16,6 +17,13 @@ public class Campaign {
     @Column
     private String name;
 
-    @ManyToOne
-    private User user;
+    @OneToOne
+    private Application app;
+
+    public Campaign() {}
+
+    public Campaign(String name, Application app) {
+        this.name = name;
+        this.app = app;
+    }
 }

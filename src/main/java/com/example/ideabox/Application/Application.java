@@ -1,6 +1,7 @@
 package com.example.ideabox.Application;
 
 import com.example.ideabox.Campaign.Campaign;
+import com.example.ideabox.User.User;
 
 import javax.persistence.*;
 
@@ -14,12 +15,19 @@ public class Application {
     private long id;
 
     @Column
-    private long token;
+    private String token;
 
     @Column
     private String name;
 
-    @OneToOne
-    private Campaign campaign;
+    @ManyToOne
+    private User user;
 
+    public Application(){}
+
+    public Application(String token, String name, User user) {
+        this.token = token;
+        this.name = name;
+        this.user = user;
+    }
 }
