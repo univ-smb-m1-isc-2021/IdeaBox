@@ -47,8 +47,8 @@ public class Initializer {
         User rg = new User("email@email", passwordEncoder.encode("123"), "RG", "Rolan", "Garos");
         User jeanmich = new User("jeanmich@gmail.com", passwordEncoder.encode("oui"), "JeanMich", "Jean", "Mich");
 
-        Campaign c1 = new Campaign("CampaignForAppTest1");
-        Campaign c2 = new Campaign("CampaignForAppTest2");
+        Campaign c1 = new Campaign("CampaignForAppTest1",rg);
+        Campaign c2 = new Campaign("CampaignForAppTest2",jeanmich);
 
         Application appTest1 = new Application("token1","AppTest1",rg);
         appTest1.setCampaign(c1);
