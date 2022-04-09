@@ -17,13 +17,9 @@ public class Campaign {
     @Column
     private String name;
 
-    @OneToOne
-    private Application app;
-
     public Campaign() {}
 
-    public Campaign(String name, Application app) {
+    public Campaign(String name) {
         this.name = name;
-        this.app = app;
     }
 }

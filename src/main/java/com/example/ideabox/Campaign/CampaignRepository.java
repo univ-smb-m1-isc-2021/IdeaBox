@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface CampaignRepository extends JpaRepository<Campaign, Long> {
 
-    List<Campaign> findCampaignByApp(Application app);
-
     Campaign findCampaignByName(String name);
 
     Campaign findCampaignById(long id);

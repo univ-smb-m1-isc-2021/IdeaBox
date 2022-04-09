@@ -2,6 +2,7 @@ package com.example.ideabox.Application;
 
 import com.example.ideabox.Campaign.Campaign;
 import com.example.ideabox.User.User;
+import io.micrometer.core.lang.Nullable;
 
 import javax.persistence.*;
 
@@ -23,11 +24,22 @@ public class Application {
     @ManyToOne
     private User user;
 
+    @ManyToOne
+    private Campaign campaign;
+
     public Application(){}
 
     public Application(String token, String name, User user) {
         this.token = token;
         this.name = name;
         this.user = user;
+    }
+
+    public Campaign getCampaign() {
+        return campaign;
+    }
+
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
     }
 }

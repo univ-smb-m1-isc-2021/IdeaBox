@@ -15,9 +15,6 @@ public class CampaignService {
         this.campaignRepository = campaignRepository;
     }
 
-    public List<Campaign> findCampaignByApp(Application app){
-        return campaignRepository.findCampaignByApp(app);
-    }
     public Campaign findCampaignByName(String name){
         return campaignRepository.findCampaignByName(name);
     }
