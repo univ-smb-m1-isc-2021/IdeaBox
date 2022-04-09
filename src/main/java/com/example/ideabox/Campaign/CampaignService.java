@@ -15,11 +15,15 @@ public class CampaignService {
         this.campaignRepository = campaignRepository;
     }
 
+    public Campaign findById(long id){
+        return campaignRepository.findCampaignById(id);
+    }
+
     public Campaign findCampaignByName(String name){
         return campaignRepository.findCampaignByName(name);
     }
 
-    public void create(Campaign campaign){
-        campaignRepository.saveAndFlush(campaign);
+    public Campaign create(Campaign campaign){
+        return campaignRepository.save(campaign);
     }
 }
