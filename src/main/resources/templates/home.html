@@ -19,6 +19,7 @@
     </div>
 
     <h1 class="mt-5 title is-1 has-text-centered">IdeaBox</h1>
+
     <ul th:if="${users}">
         <li th:each="user : ${users}" th:text="${user.pseudo}"></li>
     </ul>

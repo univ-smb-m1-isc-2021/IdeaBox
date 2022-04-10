@@ -37,6 +37,10 @@ public class UserService {
         return null;
     }
 
+    public User findUserById(long id){
+        return userRepository.findById(id);
+    }
+
     public void create(String email, String password, String pseudo, String lastName, String firstName){
         this.userRepository.saveAndFlush(new User(email,passwordEncoder.encode(password),pseudo,lastName,firstName));
     }
