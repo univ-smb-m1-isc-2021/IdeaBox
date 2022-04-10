@@ -10,9 +10,9 @@
 
 <p>
     L'application : <em th:text="${app.name}"></em> est attachée à la campagne :
-<!--    <a th:href="@{'/campaign/show/' + ${application..getId()}"-->
-<!--    th:text="${application.getCampaign().getName()}"-->
-<!--    ></a>-->
+    <a th:href="@{/campaign/show/{c_id}(c_id=${app.campaign.id})}"
+    th:text="${app.campaign.name}"
+    ></a>
 </p>
 
 
