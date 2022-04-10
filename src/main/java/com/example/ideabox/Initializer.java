@@ -57,6 +57,7 @@ public class Initializer {
 
         Question q1 = new QuestionClosed(c1,"Aimez-vous nos produits ?",true);
         Question q2 = new QuestionClosed(c2,"Notre gamme couvre t-elle vos exigeances ?",false);
+        Question q3 = new QuestionClosed(c1,"Aimez-vous le chocolat ?",false);
 
         Answer a1 = new Answer(q1,"oui");
         Answer a2 = new Answer(q2,"non");
@@ -76,6 +77,7 @@ public class Initializer {
         if(questionRepository.findAll().isEmpty()){
             questionRepository.saveAndFlush(q1);
             questionRepository.saveAndFlush(q2);
+            questionRepository.saveAndFlush(q3);
         }
         if(answerRepository.findAll().isEmpty()){
             answerRepository.saveAndFlush(a1);
