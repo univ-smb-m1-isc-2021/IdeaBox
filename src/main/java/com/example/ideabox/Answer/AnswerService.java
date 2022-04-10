@@ -22,7 +22,7 @@ public class AnswerService {
         return answerRepository.findAnswerByQuestion(question);
     }
 
-    public void create(Answer answer){
-        answerRepository.saveAndFlush(answer);
+    public void create(Question question, String value, String userIdForApp){
+        answerRepository.saveAndFlush(new Answer(question,value,userIdForApp));
     }
 }

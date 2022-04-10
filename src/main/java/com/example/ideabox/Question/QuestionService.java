@@ -26,6 +26,10 @@ public class QuestionService {
         return questionsPossibles.get(0);
     }
 
+    public Question findQuestionById(long id){
+        return questionRepository.findQuestionById(id);
+    }
+
     public void create(Question question){
         questionRepository.saveAndFlush(question);
     }

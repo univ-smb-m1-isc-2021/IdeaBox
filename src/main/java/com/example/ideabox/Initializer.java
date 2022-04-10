@@ -59,8 +59,8 @@ public class Initializer {
         Question q2 = new QuestionClosed(c2,"Notre gamme couvre t-elle vos exigeances ?",false);
         Question q3 = new QuestionClosed(c1,"Aimez-vous le chocolat ?",false);
 
-        Answer a1 = new Answer(q1,"oui");
-        Answer a2 = new Answer(q2,"non");
+        Answer a1 = new Answer(q1,"oui",null);
+        Answer a2 = new Answer(q2,"non",null);
 
         if(userRepository.findAll().isEmpty()){
             userRepository.saveAndFlush(rg);

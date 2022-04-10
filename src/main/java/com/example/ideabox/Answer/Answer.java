@@ -18,12 +18,16 @@ public class Answer {
     private Question question;
 
     @Column
+    private String userIdForApp;
+
+    @Column
     private String value;
 
     public Answer(){}
 
-    public Answer(Question question, String value) {
+    public Answer(Question question, String value, String userIdForApp) {
         this.question = question;
         this.value = value;
+        this.userIdForApp = userIdForApp;
     }
 }
