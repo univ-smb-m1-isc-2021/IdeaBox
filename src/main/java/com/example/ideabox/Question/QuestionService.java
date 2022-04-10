@@ -26,7 +26,11 @@ public class QuestionService {
         return questionsPossibles.get(0);
     }
 
-    public void create(Question question){
-        questionRepository.saveAndFlush(question);
+    public List<Question> getQuestionByCampaign(Campaign campaign){
+        return findQuestionByCampaign(campaign);
+    }
+
+    public Question create(Question question){
+        return questionRepository.save(question);
     }
 }

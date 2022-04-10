@@ -34,11 +34,12 @@
     <h2 class="title is-2">Vos Campagnes</h2>
 
     <div id="campaigns_container">
-        <div th:each="campaign:${campaigns}" th:attr="onclick=|window.location.replace('/campaign/show/${campaign.id}')|"  class="container mt-3">
-            <div th:text="${campaign.name}"></div>
+        <div th:each="campaign:${campaigns}"  class="container mt-3">
+            <a th:href="@{/campaign/show/{c_id}(c_id=${campaign.id})}"
+               th:text="${campaign.name}"></a>
         </div>
         <button class="button is-success" th:attr="onclick=|window.location.replace('/campaign/new')|">Ajouter une campagne</button>
-    </button>
+    </div>
 
 </body>
 </html>

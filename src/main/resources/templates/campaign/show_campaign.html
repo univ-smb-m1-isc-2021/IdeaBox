@@ -22,5 +22,13 @@
 
     <h1 class="title is-1 has-text-centered mt-5">Campagne : " <element th:text="${campaign.getName()}"></element> " </h1>
 
+    <p>Cette campagne comporte les questions suivantes :</p>
+
+    <div th:each="question:${questions}"  class="container mt-3">
+        <div th:text="${question.sentence}"></div>
+    </div>
+    <br>
+    <a href="/question/new">Ajouter une question</a>
+
 </body>
 </html>
