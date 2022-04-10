@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>App</title>
 </head>
 <body>
+
+<h1 th:text="${app.name}"></h1>
+
+<p>
+    L'application : <em th:text="${app.name}"></em> est attachée à la campagne :
+    <a th:href="@{/campaign/show/{c_id}(c_id=${app.campaign.id})}"
+    th:text="${app.campaign.name}"
+    ></a>
+</p>
+
 
 </body>
 </html>

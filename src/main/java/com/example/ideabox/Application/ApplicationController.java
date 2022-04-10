@@ -39,19 +39,19 @@ public class ApplicationController {
 
     @PostMapping("/new")
     public String postNewApp(@ModelAttribute ApplicationForm form, HttpServletRequest request){
-        Application application = new Application();
-        application.setName( form.getName() );
-        application.setCampaign( form.getCampaignChoisie() );
 
-        Application new_app = applicationService.create(application);
+        Application new_app = applicationService.create(
+                form.getName(),
+                (User) request.getSession().getAttribute("user"),
+                (Campaign) campaignService.findById( form.getCampaignChoisie() )
+                );
         return "redirect:/app/show/" + String.valueOf( new_app.getId() );
     }
 
 
     @GetMapping("/show/{appId}")
     public String showApp(@PathVariable(value = "appId") long id, Model model, HttpServletRequest request){
-        Application application = applicationService.findById( id );
-        model.addAttribute( "application", application );
+        model.addAttribute( "app", applicationService.findById( id ) );
         return "application/show_application";
     }
 }

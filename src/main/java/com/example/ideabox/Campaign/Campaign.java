@@ -57,6 +57,7 @@ public class Campaign {
         return "Campaign{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

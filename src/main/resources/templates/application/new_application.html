@@ -11,7 +11,14 @@
 <form action="#" th:action="@{/app/new}" th:object="${form}" method="post">
     <p> Nom de l'app : <input type="text" th:field="*{name}"> </p>
 
+    <select th:field="*{campaignChoisie}">
+        <option th:each="c: ${form.mesCampagnes}" th:value="${c.id}" th:text="${c.name}">
 
+        </option>
+
+    </select>
+
+    <br>
 
     <input type="submit" value="Creer">
 </form>

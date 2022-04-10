@@ -29,8 +29,12 @@ public class QuestionService {
     public Question findQuestionById(long id){
         return questionRepository.findQuestionById(id);
     }
+    
+    public List<Question> getQuestionByCampaign(Campaign campaign){
+        return findQuestionByCampaign(campaign);
+    }
 
-    public void create(Question question){
-        questionRepository.saveAndFlush(question);
+    public Question create(Question question){
+        return questionRepository.save(question);
     }
 }

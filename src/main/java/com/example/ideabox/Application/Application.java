@@ -30,6 +30,19 @@ public class Application {
 
     public Application(){}
 
+    public Application(String token, String name, User user, Campaign campaign) {
+        this.token = token;
+        this.name = name;
+        this.user = user;
+        this.campaign = campaign;
+    }
+
+    public Application(String name, User user, Campaign campaign) {
+        this.name = name;
+        this.user = user;
+        this.campaign = campaign;
+    }
+
     public Application(String token, String name, User user) {
         this.token = token;
         this.name = name;
@@ -74,5 +87,17 @@ public class Application {
 
     public void setCampaign(Campaign campaign) {
         this.campaign = campaign;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Application{" +
+                "id=" + id +
+                ", token='" + token + '\'' +
+                ", name='" + name + '\'' +
+                ", user=" + user +
+                ", campaign=" + campaign +
+                '}';
     }
 }

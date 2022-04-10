@@ -3,20 +3,18 @@ package com.example.ideabox.Application;
 import com.example.ideabox.Campaign.Campaign;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ApplicationForm {
 
 
     private String name;
-    private Campaign campaignChoisie;
+    private long campaignChoisie;
     private ArrayList<Campaign> mesCampagnes;
 
 
 
     public ApplicationForm() {
     }
-
 
 
     public String getName() {
@@ -27,11 +25,11 @@ public class ApplicationForm {
         this.name = name;
     }
 
-    public Campaign getCampaignChoisie() {
+    public long getCampaignChoisie() {
         return campaignChoisie;
     }
 
-    public void setCampaignChoisie(Campaign campaignChoisie) {
+    public void setCampaignChoisie(long campaignChoisie) {
         this.campaignChoisie = campaignChoisie;
     }
 

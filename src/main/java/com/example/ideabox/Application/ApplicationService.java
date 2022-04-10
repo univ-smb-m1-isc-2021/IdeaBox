@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ApplicationService {
@@ -33,5 +34,22 @@ public class ApplicationService {
 
     public Application create(Application app){
         return this.applicationRepository.save(app);
+    }
+
+    public Application create(String name, User user, Campaign campaign){
+        return this.create(
+                new Application(
+                        this.getNewAppToken(),
+                        name, user, campaign
+                )
+        );
+    }
+
+    private String getNewAppToken(){
+        String res = UUID.randomUUID().toString();
+        while ( this.findApplicationByToken( res ) != null ){
+            res = UUID.randomUUID().toString(); // pas bo mais ya plus l'temps
+        }
+        return res;
     }
 }

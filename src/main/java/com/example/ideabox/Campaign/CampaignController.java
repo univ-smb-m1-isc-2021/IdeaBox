@@ -1,6 +1,8 @@
 package com.example.ideabox.Campaign;
 
 
+import com.example.ideabox.Question.Question;
+import com.example.ideabox.Question.QuestionService;
 import com.example.ideabox.User.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("campaign")
@@ -15,12 +18,13 @@ public class CampaignController {
 
 
     private CampaignService campaignService;
+    private QuestionService questionService;
 
 
-    public CampaignController(CampaignService campaignService) {
+    public CampaignController(CampaignService campaignService, QuestionService questionService) {
         this.campaignService = campaignService;
+        this.questionService = questionService;
     }
-
 
     @GetMapping("/new")
     public String showNewCampaingForm(Model model, HttpServletRequest request){
@@ -40,7 +44,10 @@ public class CampaignController {
 
     @GetMapping("/show/{campaignId}")
     public String showCampaign(@PathVariable(value = "campaignId") long id, Model model, HttpServletRequest request){
-        model.addAttribute("campaign", this.campaignService.findById(id));
+        Campaign campaign = this.campaignService.findById(id);
+        ArrayList<Question> questions = (ArrayList<Question>) questionService.getQuestionByCampaign( campaign )  ;
+        model.addAttribute("campaign", campaign);
+        model.addAttribute("questions", questions);
         return "campaign/show_campaign";
     }
 }
