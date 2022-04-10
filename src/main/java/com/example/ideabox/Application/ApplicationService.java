@@ -1,5 +1,6 @@
 package com.example.ideabox.Application;
 
+import com.example.ideabox.Campaign.Campaign;
 import com.example.ideabox.User.User;
 import com.example.ideabox.User.UserRepository;
 import com.example.ideabox.User.UserService;
