@@ -30,6 +30,13 @@ public class Application {
 
     public Application(){}
 
+    public Application(String token, String name, User user, Campaign campaign) {
+        this.token = token;
+        this.name = name;
+        this.user = user;
+        this.campaign = campaign;
+    }
+
     public Application(String name, User user, Campaign campaign) {
         this.name = name;
         this.user = user;

@@ -39,13 +39,12 @@ public class ApplicationController {
 
     @PostMapping("/new")
     public String postNewApp(@ModelAttribute ApplicationForm form, HttpServletRequest request){
-        Application application = new Application(
+
+        Application new_app = applicationService.create(
                 form.getName(),
                 (User) request.getSession().getAttribute("user"),
                 (Campaign) campaignService.findById( form.getCampaignChoisie() )
-        );
-
-        Application new_app = applicationService.create(application);
+                );
         return "redirect:/app/show/" + String.valueOf( new_app.getId() );
     }
 
