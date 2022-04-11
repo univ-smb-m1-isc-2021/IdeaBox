@@ -28,7 +28,7 @@
         <p> Username : <input class="input" type="text" th:field="*{pseudo}"> </p>
         <p> Password : <input class="input" type="password" th:field="*{password}"> </p>
 
-        <input class="button is-success" type="submit" value="Sign in">
+        <input class="button is-success mt-2" type="submit" value="Sign in">
     </form>
 
     <p th:if="${session.user}"> Vous êtes déjà connecté.</p>

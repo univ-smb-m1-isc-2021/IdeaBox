@@ -57,4 +57,8 @@ public class QuestionService {
     public Question create(Question question){
         return questionRepository.save(question);
     }
+
+    public Question save(QuestionClosed q) {
+        return questionRepository.save(q);
+    }
 }

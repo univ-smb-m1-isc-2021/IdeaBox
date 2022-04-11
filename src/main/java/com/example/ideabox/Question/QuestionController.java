@@ -6,10 +6,7 @@ import com.example.ideabox.Campaign.CampaignService;
 import com.example.ideabox.User.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -34,5 +31,13 @@ public class QuestionController {
         QuestionClosed question = new QuestionClosed( campaign, form.getSentence(), form.getAllowNeutral() );
         questionService.create( question );
         return "redirect:/campaign/show/" + String.valueOf( campaign.getId() );
+    }
+
+    @PostMapping("/update-neutral")
+    public String updateNeutrality(@RequestBody QuestionChangeNeutralForm questionForm){
+        QuestionClosed q = (QuestionClosed) questionService.findQuestionById(questionForm.getQuestionId());
+        q.setAllowNeutral(questionForm.getAllowNeutral());
+        questionService.save(q);
+        return "redirect:/campaign/show/"+q.getCampaign().getId();
     }
 }
