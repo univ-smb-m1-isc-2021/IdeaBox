@@ -39,7 +39,7 @@
                     container.innerHTML = question;
                 }
             };
-            xhr.open('GET', "/api/&lt;TOKEN&gt;/getQuestion", true);
+            xhr.open('GET', "https://ideabox.oups.net/api/&lt;TOKEN&gt;/getQuestion", true);
             xhr.send();
         }
 
@@ -56,7 +56,7 @@
                     container.innerHTML = question;
                 }
             };
-            xhr.open('GET', "/api/&lt;TOKEN&gt;/getQuestion?userId="+userId, true);
+            xhr.open('GET', "https://ideabox.oups.net/api/&lt;TOKEN&gt;/getQuestion?userId="+userId, true);
             xhr.send();
         }
 
@@ -66,7 +66,7 @@
 
         function giveIdeaboxAnswer(questionId){
             let xhr = new XMLHttpRequest();
-            xhr.open('POST','http://localhost:8080/api/&lt;TOKEN&gt;/give-answer');
+            xhr.open('POST','https://ideabox.oups.net/api/&lt;TOKEN&gt;/give-answer');
             xhr.setRequestHeader("Accept", "application/json");
             xhr.setRequestHeader("Content-Type", "application/json");
             let data = {'questionId':questionId,'value' : document.querySelector('input[name="ideabox-answer"]:checked').value};
@@ -76,7 +76,7 @@
 
         function giveIdeaboxAnswerWithUser(questionId,userId){
             let xhr = new XMLHttpRequest();
-            xhr.open('POST','http://localhost:8080/api/&lt;TOKEN&gt;/give-answer');
+            xhr.open('POST','https://ideabox.oups.net/api/&lt;TOKEN&gt;/give-answer');
             xhr.setRequestHeader("Accept", "application/json");
             xhr.setRequestHeader("Content-Type", "application/json");
             let data = {
