@@ -8,12 +8,9 @@ public class QuestionForm {
 
     private String sentence;
 
-    private ArrayList<Campaign> campaigns;
-
     private long campaignId;
 
-    private String questionType;
-
+    private boolean allowNeutral;
 
     public String getSentence() {
         return sentence;
@@ -21,14 +18,6 @@ public class QuestionForm {
 
     public void setSentence(String sentence) {
         this.sentence = sentence;
-    }
-
-    public ArrayList<Campaign> getCampaigns() {
-        return campaigns;
-    }
-
-    public void setCampaigns(ArrayList<Campaign> campaigns) {
-        this.campaigns = campaigns;
     }
 
     public long getCampaignId() {
@@ -39,11 +28,11 @@ public class QuestionForm {
         this.campaignId = campaignId;
     }
 
-    public String getQuestionType() {
-        return questionType;
+    public boolean getAllowNeutral() {
+        return allowNeutral;
     }
 
-    public void setQuestionType(String questionType) {
-        this.questionType = questionType;
+    public void setAllowNeutral(boolean allowNeutral) {
+        this.allowNeutral = allowNeutral;
     }
 }

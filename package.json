@@ -1,41 +1,48 @@
 {
-  "name": "ideabox",
-  "version": "1.0.0",
-  "description": "IdeaBox is a widget that allows user feedback on your applications",
-  "directories": {
-    "lib": "lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/univ-smb-m1-isc-2021/idea-box.git"
-  },
-  "keywords": [
-    "campaign",
-    "question",
-    "user",
-    "feedback",
-    "ask"
-  ],
-  "author": "Léo Laffont & Arthur Bajt",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/univ-smb-m1-isc-2021/idea-box/issues"
-  },
-  "homepage": "https://github.com/univ-smb-m1-isc-2021/idea-box#readme",
-  "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "rest": "^1.3.1"
-  },
+  "name": "spring-boot-starter-react",
+  "license": "Beerware",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "upgrade": "upgrade --latest",
+    "bundle": "parcel build src/main/js/index.js --out-dir target/classes/static/dist --out-file bundle --public-url /dist",
+    "postbundle": "date-now --format='DD.MM.YYYY-HH:mm:ss (A)' | cowthink $1",
+    "watch": "parcel watch src/main/js/index.js --out-dir target/classes/static/dist --out-file bundle --public-url /dist",
+    "postwatch": "date-now --format='DD.MM.YYYY-HH:mm:ss (A)' | cowthink $1"
+  },
+  "dependencies": {
+    "bulma": "^0.9.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "5.0.0",
+    "styled-components": "5.3.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.2",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.0"
+    "autoprefixer": "10.4.2",
+    "babel-core": "6.26.3",
+    "babel-eslint": "10.1.0",
+    "babel-jest": "27.5.1",
+    "babel-plugin-styled-components": "^2.0.6",
+    "babel-polyfill": "6.26.0",
+    "babel-preset-react": "6.24.1",
+    "cowsay": "1.5.0",
+    "cross-env": "7.0.3",
+    "date-now-cli": "2.0.0",
+    "jest": "27.5.1",
+    "jest-create-mock-instance": "2.0.0",
+    "jest-dom": "4.0.0",
+    "jest-junit": "13.0.0",
+    "jest-localstorage-mock": "2.4.19",
+    "node-sass": "7.0.1",
+    "parcel-bundler": "1.12.5"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/main/js/**/*.js"
+    ],
+    "coverageDirectory": "target/js-coverage",
+    "setupFiles": [
+      "./src/test/jest/setup-jest.js",
+      "jest-localstorage-mock"
+    ]
   }
 }

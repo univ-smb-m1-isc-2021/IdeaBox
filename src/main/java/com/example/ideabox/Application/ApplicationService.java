@@ -52,4 +52,12 @@ public class ApplicationService {
         }
         return res;
     }
+
+    public Application findApplicationById(long id) {
+        return applicationRepository.findApplicationById(id);
+    }
+
+    public Application save(Application app){
+        return applicationRepository.save(app);
+    }
 }

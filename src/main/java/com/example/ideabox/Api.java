@@ -3,25 +3,31 @@ package com.example.ideabox;
 import com.example.ideabox.Answer.AnswerForm;
 import com.example.ideabox.Answer.AnswerService;
 import com.example.ideabox.Application.ApplicationService;
+import com.example.ideabox.Campaign.Campaign;
+import com.example.ideabox.Campaign.CampaignService;
 import com.example.ideabox.Question.Question;
 import com.example.ideabox.Question.QuestionClosed;
+import com.example.ideabox.Question.QuestionForm;
 import com.example.ideabox.Question.QuestionService;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import java.lang.constant.Constable;
 
 @RestController
 public class Api {
 
     private final ApplicationService applicationService;
+    private final CampaignService campaignService;
     private final QuestionService questionService;
     private final AnswerService answerService;
 
-    public Api(ApplicationService applicationService, QuestionService questionService, AnswerService answerService) {
+    public Api(ApplicationService applicationService, CampaignService campaignService, QuestionService questionService, AnswerService answerService) {
         this.applicationService = applicationService;
+        this.campaignService = campaignService;
         this.questionService = questionService;
         this.answerService = answerService;
     }
@@ -29,6 +35,9 @@ public class Api {
     @GetMapping("/api/{token}/getQuestion")
     public String getQuestion(@PathVariable String token, @RequestParam(required = false, defaultValue = "", value="userId") String userId){
         Question q = questionService.getAnyQuestionByCampaign(applicationService.findApplicationByToken(token).getCampaign());
+        if(q == null){
+            return "";
+        }
         StringBuilder res = new StringBuilder()
                 .append("<div id='ideabox'>")
                 .append("<div id='ideabox-question'>")
@@ -62,7 +71,6 @@ public class Api {
                 .append("xhr.open('POST','/api/"+token+"/give-answer');")
                 .append("xhr.setRequestHeader(\"Accept\", \"application/json\");")
                 .append("xhr.setRequestHeader(\"Content-Type\", \"application/json\");")
-                .append("xhr.onload = () => console.log(xhr.responseText);")
                 .append("let data = {")
                 .append("'questionId':"+q.getId())
                 .append(",'value' : document.querySelector('input[name=\"ideabox-answer\"]:checked').value");

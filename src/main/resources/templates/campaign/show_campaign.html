@@ -22,13 +22,21 @@
 
     <h1 class="title is-1 has-text-centered mt-5">Campagne : " <element th:text="${campaign.getName()}"></element> " </h1>
 
-    <p>Cette campagne comporte les questions suivantes :</p>
+    <h2 class="title is-2 mt-6">Les questions de la campagne.</h2>
 
-    <div th:each="question:${questions}"  class="container mt-3">
-        <div th:text="${question.sentence}"></div>
+    <div class="container mt-3">
+        <div class="is-flex" th:each="question:${questions}">
+            <div class="is-size-4" th:text="${question.sentence}"></div>
+            <button class="button is-info ml-2" th:attr="onclick=|window.location.replace('/answer/${question.id}')|">Voir les réponses</button>
+        </div>
+        <form class="mt-3" action="#" th:action="@{/question/new}" th:object="${form}" method="post">
+            <input type="hidden" th:value="*{campaignId}" th:field="*{campaignId}">
+            <input class="input" type="text" th:field="*{sentence}">
+
+            <input class="button is-success mt-2" type="submit" value="Ajouter">
+        </form>
     </div>
     <br>
-    <a href="/question/new">Ajouter une question</a>
 
 </body>
 </html>

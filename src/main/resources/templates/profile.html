@@ -23,23 +23,78 @@
 
     <h2 class="title is-2">Vos Applications</h2>
 
-    <div id="apps_container">
-        <div class="container card mt-3" th:each="app:${apps}">
-            <div th:text="${app.name}"></div>
-            <div th:text="${app.token}"></div>
-            <div th:text="${app.campaign.name}"></div>
+    <div id="apps_container" class="is-centered container">
+        <div class="box" th:each="app:${apps}">
+            <div class="has-text-left is-size-2" th:text="${app.name}"></div>
+
+            <div class="mt-2">
+                <div class="card">
+                    <input type="button" value="Copier" class="button js-copy" th:id="${'copyBtn'+app.id}" th:attr="onclick=|docopy('${app.token}','copyBtn${app.id}')|">
+                    <span class="is-size-4 ml-2" th:text="${app.token}"></span>
+                </div>
+            </div>
+
+<!--            <div class="is-size-3 mt-2" th:text="${app.campaign.name}"></div>-->
+            <div class="select is-medium mt-2">
+                <select th:attr="name=|campaign_app_${app.id}|" th:attrappend="onchange=|changeCampaign(${app.id},'campaign_app_${app.id}')|">
+                    <option th:value="0"></option>
+                    <option th:each="campaign:${campaigns}" th:value="${campaign.id}" th:text="${campaign.name}"
+                            th:selected="${app.campaign != null && campaign.id == app.campaign.id}"></option>
+                </select>
+            </div>
         </div>
+        <button class="button is-success" onclick="window.location.replace('/app/new');">Ajouter une application</button>
     </div>
 
-    <h2 class="title is-2">Vos Campagnes</h2>
+    <h2 class="title is-2 mt-5">Vos Campagnes</h2>
 
-    <div id="campaigns_container">
-        <div th:each="campaign:${campaigns}"  class="container mt-3">
-            <a th:href="@{/campaign/show/{c_id}(c_id=${campaign.id})}"
-               th:text="${campaign.name}"></a>
+    <div id="campaigns_container" class="container mt-3">
+        <div th:each="userCampaign:${campaigns}">
+            <a class="is-size-3" th:href="@{/campaign/show/{c_id}(c_id=${userCampaign.id})}"
+               th:text="${userCampaign.name}"></a>
         </div>
-        <button class="button is-success" th:attr="onclick=|window.location.replace('/campaign/new')|">Ajouter une campagne</button>
+        <form action="#" th:action="@{/campaign/new}" th:object="${campaign}" method="post">
+            <p> Nouvelle campagne : <input class="input" type="text" th:field="*{name}"> </p>
+
+            <input class="button is-success mt-2" type="submit" value="Créer">
+        </form>
     </div>
+
+    <script>
+
+        function docopy(str, idBtn) {
+            var copyStr = str;
+            navigator.clipboard.writeText(copyStr);
+            try {
+                // Exécution de la commande de copie
+                result = navigator.clipboard.writeText(copyStr);
+                if (result) {
+                    // La copie a réussi
+                    var btnscopy = document.querySelectorAll('.js-copy');
+                    for(let i = 0; i<btnscopy.length; ++i){
+                        btnscopy[i].classList.remove('is-success');
+                        btnscopy[i].value = "Copier";
+                    }
+                    document.querySelector('#'+idBtn).classList.add("is-success");
+                    document.querySelector('#'+idBtn).value = "Copié !";
+                }
+            }
+            catch(err) {
+                // Une erreur est surevnue lors de la tentative de copie
+                alert(err);
+            }
+        }
+
+        function changeCampaign(appId,selectId){
+            let campaignId = document.getElementsByName(selectId)[0].value;
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST","/app/update-campaign/",true);
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            let data = {"appId":appId,"campaignId":campaignId};
+            xhr.send(JSON.stringify(data));
+        }
+    </script>
 
 </body>
 </html>

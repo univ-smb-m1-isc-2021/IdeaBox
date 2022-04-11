@@ -22,12 +22,6 @@ public class QuestionClosed extends Question{
         this.allowNeutral = allowNeutral;
     }
 
-    public QuestionClosed(Campaign campaign, String sentence){
-        this.campaign = campaign;
-        this.sentence = sentence;
-        this.allowNeutral = false;
-    }
-
     public boolean getAllowNeutral() {
         return allowNeutral;
     }

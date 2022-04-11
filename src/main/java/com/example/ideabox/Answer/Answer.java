@@ -30,4 +30,36 @@ public class Answer {
         this.value = value;
         this.userIdForApp = userIdForApp;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public String getUserIdForApp() {
+        return userIdForApp;
+    }
+
+    public void setUserIdForApp(String userIdForApp) {
+        this.userIdForApp = userIdForApp;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }

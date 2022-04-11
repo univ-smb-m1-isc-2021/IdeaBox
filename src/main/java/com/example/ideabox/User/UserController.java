@@ -3,6 +3,7 @@ package com.example.ideabox.User;
 
 import com.example.ideabox.Application.ApplicationService;
 import com.example.ideabox.Campaign.Campaign;
+import com.example.ideabox.Campaign.CampaignForm;
 import com.example.ideabox.Campaign.CampaignService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,6 +79,7 @@ public class UserController {
     public String showProfile(Model model,HttpServletRequest request){
         model.addAttribute("apps",applicationService.findApplicationByUser((User)request.getSession().getAttribute("user")));
         model.addAttribute("campaigns",campaignService.findCampaignByUser((User)request.getSession().getAttribute("user")));
+        model.addAttribute("campaign",new CampaignForm());
         return "profile";
     }
 }

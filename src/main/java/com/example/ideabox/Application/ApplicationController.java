@@ -45,13 +45,18 @@ public class ApplicationController {
                 (User) request.getSession().getAttribute("user"),
                 (Campaign) campaignService.findById( form.getCampaignChoisie() )
                 );
-        return "redirect:/app/show/" + String.valueOf( new_app.getId() );
+        return "redirect:/user/profile";
     }
 
-
-    @GetMapping("/show/{appId}")
-    public String showApp(@PathVariable(value = "appId") long id, Model model, HttpServletRequest request){
-        model.addAttribute( "app", applicationService.findById( id ) );
-        return "application/show_application";
+    @PostMapping("/update-campaign")
+    public String updateCampaign(@RequestBody ApplicationUpdateCampaignForm updateForm){
+        Application app = applicationService.findApplicationById(updateForm.getAppId());
+        if(updateForm.getCampaignId() == 0){
+            app.setCampaign(null);
+        } else {
+            app.setCampaign(campaignService.findById(updateForm.getCampaignId()));
+        }
+        applicationService.save(app);
+        return "redirect:/user/profile";
     }
 }

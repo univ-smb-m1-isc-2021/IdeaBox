@@ -2,6 +2,7 @@ package com.example.ideabox.Campaign;
 
 
 import com.example.ideabox.Question.Question;
+import com.example.ideabox.Question.QuestionForm;
 import com.example.ideabox.Question.QuestionService;
 import com.example.ideabox.User.User;
 import org.springframework.stereotype.Controller;
@@ -26,28 +27,22 @@ public class CampaignController {
         this.questionService = questionService;
     }
 
-    @GetMapping("/new")
-    public String showNewCampaingForm(Model model, HttpServletRequest request){
-        Campaign campaign = new Campaign();
-        model.addAttribute("campaign", campaign);
-        return "campaign/new_campaign";
-    }
-
-
     @PostMapping("/new")
-    public String postNewCampaingForm(@ModelAttribute Campaign campaign, HttpServletRequest request){
-        campaign.setUser( (User) request.getSession().getAttribute("user") );
+    public String postNewCampaingForm(@ModelAttribute CampaignForm campaignForm, HttpServletRequest request){
+        Campaign campaign = new Campaign(campaignForm.getName(),(User) request.getSession().getAttribute("user"));
         Campaign new_campaign = this.campaignService.create( campaign );
-        return "redirect:/campaign/show/" + String.valueOf( new_campaign.getId() );
+        return "redirect:/user/profile";
     }
-
 
     @GetMapping("/show/{campaignId}")
     public String showCampaign(@PathVariable(value = "campaignId") long id, Model model, HttpServletRequest request){
         Campaign campaign = this.campaignService.findById(id);
-        ArrayList<Question> questions = (ArrayList<Question>) questionService.getQuestionByCampaign( campaign )  ;
+        ArrayList<Question> questions = (ArrayList<Question>) questionService.getQuestionByCampaign( campaign );
+        QuestionForm qf = new QuestionForm();
+        qf.setCampaignId(id);
         model.addAttribute("campaign", campaign);
         model.addAttribute("questions", questions);
+        model.addAttribute("form", qf);
         return "campaign/show_campaign";
     }
 }

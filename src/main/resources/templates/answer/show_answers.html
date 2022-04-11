@@ -2,7 +2,7 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>IdeaBox - Nouvelle campagne</title>
+    <title>Idea - Réponses</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body class="p-2">
@@ -20,13 +20,13 @@
         </div>
     </div>
 
-    <h1 class="title is-1 has-text-centered mt-5">Nouvelle campagne</h1>
-
-    <form action="#" th:action="@{/campaign/new}" th:object="${campaign}" method="post">
-        <p> Nom de la campagne : <input class="input" type="text" th:field="*{name}"> </p>
-
-        <input class="button is-success" type="submit" value="Créer">
-    </form>
-
+    <h1 class="title is-1 mt-5 has-text-centered" th:text="${question.sentence}"></h1>
+    <div id="answers-container" class="has-text-centered mt-6">
+        <span class="is-size-2 card p-2 mr-2" th:each="occurrence: ${occurrences}">
+            <span th:text="${occurrence.key}"></span> :
+            <span th:text="${occurrence.value}"></span>
+        </span>
+        <p class="is-size-4" th:if="${occurrences.isEmpty()}">Il n'y a eu aucune réponse pour le moment.</p>
+    </div>
 </body>
 </html>

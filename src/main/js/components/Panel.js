@@ -10,7 +10,7 @@ const StyledPanel = styled.div`
 `;
 
 const Panel = ({user}) => (
-    <StyledPanel>{user.pseudo + " " + user.email}</StyledPanel>
+    <StyledPanel>{user.pseudo + " : " + user.email}</StyledPanel>
 );
 
 export default Panel;

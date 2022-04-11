@@ -20,14 +20,23 @@
 
     <h1 class="mt-5 title is-1 has-text-centered">IdeaBox</h1>
 
-    <ul th:if="${users}">
-        <li th:each="user : ${users}" th:text="${user.pseudo}"></li>
-    </ul>
-    <ul th:if="${session.user}">
-        <li th:text="${user.getLastName()}"></li>
-        <li th:text="${user.getFirstName}"></li>
-        <li th:text="${user.getPseudo()}"></li>
-        <li th:text="${user.getEmail()}"></li>
-    </ul>
+    <div class="content ml-5 mr-5">
+        <p class="is-size-3">Comment utiliser IdeaBox ?</p>
+        <p>Rien de plus simple, ajoutez ces balises a la fin de votre document.</p>
+        <pre class="card is-one-third">
+&lt;div id="ideabox-container"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var container = document.getElementById("ideabox-container");
+    var req = new Request("http://ideabox.oups.net/api/&lt;TOKEN&gt;/getQuestion");
+
+    fetch(req).then(function(reponse) {
+      return reponse.body();
+    }).then(function(reponse) {
+      var question = response;
+      container.innerHTML = question;
+    });
+&lt;/script&gt;</pre>
+        <p>A vous après de personnaliser l'affichage !</p>
+    </div>
 </body>
 </html>

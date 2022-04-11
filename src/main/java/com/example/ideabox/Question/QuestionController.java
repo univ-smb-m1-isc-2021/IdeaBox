@@ -28,21 +28,10 @@ public class QuestionController {
         this.campaignService = campaignService;
     }
 
-
-
-    @GetMapping("/new")
-    public String showNewQuestionForm(Model model, HttpServletRequest request){
-        QuestionForm form = new QuestionForm();
-        User user = (User) request.getSession().getAttribute("user");
-        form.setCampaigns( (ArrayList<Campaign>) campaignService.findByUser( user ));
-        model.addAttribute("form", form);
-        return "question/new_question";
-    }
-
     @PostMapping("/new")
     public String postNewQuestion(@ModelAttribute QuestionForm form, HttpServletRequest request){
         Campaign campaign = (Campaign) campaignService.findById( form.getCampaignId() );
-        QuestionClosed question = new QuestionClosed( campaign, form.getSentence() );
+        QuestionClosed question = new QuestionClosed( campaign, form.getSentence(), form.getAllowNeutral() );
         questionService.create( question );
         return "redirect:/campaign/show/" + String.valueOf( campaign.getId() );
     }

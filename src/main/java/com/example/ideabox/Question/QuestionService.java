@@ -21,9 +21,29 @@ public class QuestionService {
     }
 
     public Question getAnyQuestionByCampaign(Campaign campaign){
+        if(campaign == null){
+            return null;
+        }
         List<Question> questionsPossibles = findQuestionByCampaign(campaign);
+        if(questionsPossibles.isEmpty()){
+            return null;
+        }
         Collections.shuffle(questionsPossibles);
         return questionsPossibles.get(0);
+    }
+
+    public List<Question> findQuestionByCampaignButUserIdForApp(Campaign campaign, String userIdForApp){
+        return questionRepository.findQuestionByCampaign(campaign);
+    }
+
+    public Question getAnyQuestionByCampaignButUserIdForApp(Campaign campaign, String userIdForApp) {
+        List<Question> questionsPossibles = findQuestionByCampaignButUserIdForApp(campaign,userIdForApp);
+        if(questionsPossibles.size() > 0){
+            Collections.shuffle(questionsPossibles);
+            return questionsPossibles.get(0);
+        } else {
+            return null;
+        }
     }
 
     public Question findQuestionById(long id){
