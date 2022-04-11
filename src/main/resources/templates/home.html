@@ -26,17 +26,169 @@
         <pre class="card is-one-third">
 &lt;div id="ideabox-container"&gt;&lt;/div&gt;
 &lt;script&gt;
-    var container = document.getElementById("ideabox-container");
-    var req = new Request("http://ideabox.oups.net/api/&lt;TOKEN&gt;/getQuestion");
-
-    fetch(req).then(function(reponse) {
-      return reponse.body();
-    }).then(function(reponse) {
-      var question = response;
-      container.innerHTML = question;
-    });
+        var container = document.getElementById("ideabox-container");
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState != 4) return;
+            if (this.status == 200) {
+                var question = this.responseText;
+                container.innerHTML = question;
+            }
+        };
+        xhr.open('GET', "/api/&lt;TOKEN&gt;/getQuestion", true);
+        xhr.send();
+        function closeIdeabox(){
+            document.getElementById('ideabox').style.display = 'none';
+        }
+        function giveIdeaboxAnswer(questionId){
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST','http://localhost:8080/api/&lt;TOKEN&gt;/give-answer');
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            let data = {'questionId':questionId,'value' : document.querySelector('input[name="ideabox-answer"]:checked').value};
+            xhr.send(JSON.stringify(data));
+            document.getElementById('ideabox').innerHTML = "Merci d'avoir répondu !";
+        }
 &lt;/script&gt;</pre>
         <p>A vous après de personnaliser l'affichage !</p>
+        <p>Exemple d'utilisation :</p>
     </div>
+
+    <div id="ideabox-container"></div>
+    <script>
+        var container = document.getElementById("ideabox-container");
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if (this.readyState != 4) return;
+
+            if (this.status == 200) {
+                var question = this.responseText;
+                container.innerHTML = question;
+            }
+        };
+        xhr.open('GET', "/api/TokenIdeaBox/getQuestion", true);
+        xhr.send();
+
+        function closeIdeabox(){
+            document.getElementById('ideabox').style.display = 'none';
+        }
+
+        function giveIdeaboxAnswer(questionId){
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST','http://localhost:8080/api/TokenIdeaBox/give-answer');
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            let data = {'questionId':questionId,'value' : document.querySelector('input[name="ideabox-answer"]:checked').value};
+            xhr.send(JSON.stringify(data));
+            document.getElementById('ideabox').innerHTML = "Merci d'avoir répondu !";
+        }
+    </script>
+    <style>
+        #ideabox-container
+        {
+            margin-left: 1.5rem!important;
+            margin-right: 1.5rem!important;
+            margin-bottom: 1.5rem!important;
+            font-size: 2rem!important;
+            text-align: center!important;
+        }
+        #ideabox
+        {
+            border-radius: 0.25rem!important;
+            background-color: rgba(245, 228, 210, 0.45) !important;
+            box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%)!important;
+            padding: 0.5rem!important;
+        }
+        #ideabox-question
+        {
+            text-align: center!important;
+            font-size: 2rem!important;
+        }
+        #ideabox-close
+        {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: #f14668!important;
+            border-color: transparent!important;
+            color: #fff!important;
+            cursor: pointer!important;
+            justify-content: center!important;
+            padding-bottom: calc(0.5em - 1px)!important;
+            padding-left: 1em!important;
+            padding-right: 1em!important;
+            padding-top: calc(0.5em - 1px)!important;
+            text-align: center!important;
+            white-space: nowrap!important;-moz-appearance: none;
+            -webkit-appearance: none;
+            align-items: center;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            box-shadow: none;
+            display: inline-flex;
+            font-size: 1rem;
+            height: 2.5em;
+            line-height: 1.5;
+            position: relative;
+            vertical-align: top;
+        }
+        #ideabox-validate
+        {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: #48c78e!important;
+            border-color: transparent!important;
+            color: #fff!important;
+            cursor: pointer!important;
+            justify-content: center!important;
+            padding-bottom: calc(0.5em - 1px)!important;
+            padding-left: 1em!important;
+            padding-right: 1em!important;
+            padding-top: calc(0.5em - 1px)!important;
+            text-align: center!important;
+            white-space: nowrap!important;-moz-appearance: none;
+            -webkit-appearance: none;
+            align-items: center;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            box-shadow: none;
+            display: inline-flex;
+            font-size: 1rem;
+            height: 2.5em;
+            line-height: 1.5;
+            position: relative;
+            vertical-align: top;
+            margin-left: 0.25rem;
+        }
+        #ideabox-buttons
+        {
+            margin-top: 1rem!important;
+            text-align: center!important;
+        }
+        #ideabox-answers
+        {
+            margin-top: 0.5rem!important;
+            text-align: center!important;
+        }
+        input[name="ideabox-answer"]
+        {
+            margin-left: 2rem!important;
+            margin-right: 0.25rem!important;
+        }
+        input[name="ideabox-answer"]:first-child
+        {
+            margin-left: 0;
+        }
+        #ideabox-answers > label
+        {
+            font-size: 1.5rem!important;
+        }
+    </style>
 </body>
 </html>

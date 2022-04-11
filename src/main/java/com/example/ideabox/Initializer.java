@@ -44,20 +44,18 @@ public class Initializer {
         campaignRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
 
-        User rg = new User("email@email", passwordEncoder.encode("123"), "RG", "Rolan", "Garos");
+        User rg = new User("ideabox@gmail.com", passwordEncoder.encode("App2Fou"), "IdeaBox", "Idea", "Box");
         User jeanmich = new User("jeanmich@gmail.com", passwordEncoder.encode("oui"), "JeanMich", "Jean", "Mich");
 
-        Campaign c1 = new Campaign("CampaignForAppTest1",rg);
+        Campaign c1 = new Campaign("PotentialUsers",rg);
         Campaign c2 = new Campaign("CampaignForAppTest2",jeanmich);
 
-        Application appTest1 = new Application("token1","AppTest1",rg);
-        appTest1.setCampaign(c1);
-        Application appTest2 = new Application("token2","AppTest2",jeanmich);
-        appTest2.setCampaign(c2);
+        Application appTest1 = new Application("TokenIdeaBox","IdeaBox",rg,c1);
+        Application appTest2 = new Application("token2","AppTest2",jeanmich,c2);
 
-        Question q1 = new QuestionClosed(c1,"Aimez-vous nos produits ?",true);
-        Question q2 = new QuestionClosed(c2,"Notre gamme couvre t-elle vos exigeances ?",false);
-        Question q3 = new QuestionClosed(c1,"Aimez-vous le chocolat ?",false);
+        Question q1 = new QuestionClosed(c1,"Comptez-vous utiliser notre produit ?",true);
+        Question q2 = new QuestionClosed(c2,"Aimez-vous le chocolat ?",true);
+        Question q3 = new QuestionClosed(c2,"Notre gamme couvre t-elle vos exigeances ?",false);
 
         Answer a1 = new Answer(q1,"oui",null);
         Answer a2 = new Answer(q2,"non",null);

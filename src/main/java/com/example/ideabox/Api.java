@@ -55,33 +55,15 @@ public class Api {
                     .append("<label for='oui'>Non</label>");
         }
         res.append("</div>")
+                .append("<div id='ideabox-buttons'>")
                 .append("<button id='ideabox-close' onclick='closeIdeabox()'>")
                 .append("Fermer")
                 .append("</button>")
-                .append("<button id='ideabox-validate' onclick='giveIdeaboxAnswer()'>")
+                .append("<button id='ideabox-validate' onclick='giveIdeaboxAnswer("+q.getId()+")'>")
                 .append("Répondre")
                 .append("</button>")
                 .append("</div>")
-                .append("<script>")
-                .append("function closeIdeabox(){")
-                .append("document.getElementById('ideabox').style.display = 'none';")
-                .append("}")
-                .append("function giveIdeaboxAnswer(){")
-                .append("let xhr = new XMLHttpRequest();")
-                .append("xhr.open('POST','/api/"+token+"/give-answer');")
-                .append("xhr.setRequestHeader(\"Accept\", \"application/json\");")
-                .append("xhr.setRequestHeader(\"Content-Type\", \"application/json\");")
-                .append("let data = {")
-                .append("'questionId':"+q.getId())
-                .append(",'value' : document.querySelector('input[name=\"ideabox-answer\"]:checked').value");
-        if(!userId.equals("")){
-            res.append(",'userId':"+userId);
-        }
-        res.append("};")
-                .append("xhr.send(JSON.stringify(data));")
-                .append("closeIdeabox();")
-                .append("}")
-                .append("</script>");
+                .append("</div>");
         return res.toString();
     }
 
