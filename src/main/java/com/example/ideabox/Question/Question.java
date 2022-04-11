@@ -14,7 +14,7 @@ public abstract class Question {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected long id;
 
-    @OneToOne
+    @ManyToOne
     protected Campaign campaign;
 
     @Column
