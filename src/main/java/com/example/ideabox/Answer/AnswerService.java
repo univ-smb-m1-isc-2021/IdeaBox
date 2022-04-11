@@ -39,4 +39,19 @@ public class AnswerService {
     public void create(Question question, String value, String userIdForApp){
         answerRepository.saveAndFlush(new Answer(question,value,userIdForApp));
     }
+
+    public List<Answer> findAnswerByIdUserForApp(String userIdForApp) {
+        return answerRepository.findAnswerByUserIdForApp(userIdForApp);
+    }
+
+    public List<Question> getQuestionAnsweredByUser(String userId){
+        List<Answer> userAnswers = findAnswerByIdUserForApp(userId);
+        ArrayList<Question> questionsAnsweredByUser = new ArrayList<>();
+        for(int i = 0; i<userAnswers.size(); ++i){
+            if(!questionsAnsweredByUser.contains(userAnswers.get(i).getQuestion())){
+                questionsAnsweredByUser.add(userAnswers.get(i).getQuestion());
+            }
+        }
+        return questionsAnsweredByUser;
+    }
 }

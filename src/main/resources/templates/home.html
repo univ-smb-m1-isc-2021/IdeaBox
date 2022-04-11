@@ -23,23 +23,47 @@
     <div class="content ml-5 mr-5">
         <p class="is-size-3">Comment utiliser IdeaBox ?</p>
         <p>Rien de plus simple, ajoutez ces balises a la fin de votre document.</p>
-        <pre class="card is-one-third">
+        <pre class="card is-one-third" id="tocopy">
 &lt;div id="ideabox-container"&gt;&lt;/div&gt;
 &lt;script&gt;
-        var container = document.getElementById("ideabox-container");
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (this.readyState != 4) return;
-            if (this.status == 200) {
-                var question = this.responseText;
-                container.innerHTML = question;
-            }
-        };
-        xhr.open('GET', "/api/&lt;TOKEN&gt;/getQuestion", true);
-        xhr.send();
+        function getQuestion(){
+            console.log("no user connected, calling IdeaBox API without userId");
+            var container = document.getElementById("ideabox-container");
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    var question = this.responseText;
+                    container.innerHTML = question;
+                }
+            };
+            xhr.open('GET', "/api/&lt;TOKEN&gt;/getQuestion", true);
+            xhr.send();
+        }
+
+        function getQuestionWithUserId(userId){
+            console.log("user connected, calling IdeaBox API with userId");
+            var container = document.getElementById("ideabox-container");
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    var question = this.responseText;
+                    container.innerHTML = question;
+                }
+            };
+            xhr.open('GET', "/api/&lt;TOKEN&gt;/getQuestion?userId="+userId, true);
+            xhr.send();
+        }
+
         function closeIdeabox(){
             document.getElementById('ideabox').style.display = 'none';
         }
+
         function giveIdeaboxAnswer(questionId){
             let xhr = new XMLHttpRequest();
             xhr.open('POST','http://localhost:8080/api/&lt;TOKEN&gt;/give-answer');
@@ -49,26 +73,64 @@
             xhr.send(JSON.stringify(data));
             document.getElementById('ideabox').innerHTML = "Merci d'avoir répondu !";
         }
+
+        function giveIdeaboxAnswerWithUser(questionId,userId){
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST','http://localhost:8080/api/&lt;TOKEN&gt;/give-answer');
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            let data = {
+                'questionId':questionId,
+                'value' : document.querySelector('input[name="ideabox-answer"]:checked').value,
+                'userId' : userId
+            };
+            xhr.send(JSON.stringify(data));
+            document.getElementById('ideabox').innerHTML = "Merci d'avoir répondu !";
+        }
 &lt;/script&gt;</pre>
-        <p>A vous après de personnaliser l'affichage !</p>
+        <button class="button" id="btnCopy" onclick="copy()">Copier</button>
+        <p>Ensuite vous n'aurez qu'à appeler <code>getQuestion()</code> si vous n'avez pas d'utilisateur connecté.
+            Sinon <code>getQuestionWithUserId(&lt;USER_ID&gt;)</code>. De cette manière votre utilisateur ne verra
+            pas deux fois une question à laquelle il aurait répondu.</p>
+        <p>À vous de personnaliser l'affichage !</p>
         <p>Exemple d'utilisation :</p>
     </div>
 
     <div id="ideabox-container"></div>
     <script>
-        var container = document.getElementById("ideabox-container");
-        var xhr = new XMLHttpRequest();
+        function getQuestion(){
+            console.log("no user connected, calling IdeaBox API without userId");
+            var container = document.getElementById("ideabox-container");
+            var xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function () {
-            if (this.readyState != 4) return;
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
 
-            if (this.status == 200) {
-                var question = this.responseText;
-                container.innerHTML = question;
-            }
-        };
-        xhr.open('GET', "/api/TokenIdeaBox/getQuestion", true);
-        xhr.send();
+                if (this.status == 200) {
+                    var question = this.responseText;
+                    container.innerHTML = question;
+                }
+            };
+            xhr.open('GET', "/api/TokenIdeaBox/getQuestion", true);
+            xhr.send();
+        }
+
+        function getQuestionWithUserId(userId){
+            console.log("user connected, calling IdeaBox API with userId");
+            var container = document.getElementById("ideabox-container");
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    var question = this.responseText;
+                    container.innerHTML = question;
+                }
+            };
+            xhr.open('GET', "/api/TokenIdeaBox/getQuestion?userId="+userId, true);
+            xhr.send();
+        }
 
         function closeIdeabox(){
             document.getElementById('ideabox').style.display = 'none';
@@ -83,7 +145,44 @@
             xhr.send(JSON.stringify(data));
             document.getElementById('ideabox').innerHTML = "Merci d'avoir répondu !";
         }
+
+        function giveIdeaboxAnswerWithUser(questionId,userId){
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST','http://localhost:8080/api/TokenIdeaBox/give-answer');
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            let data = {
+                'questionId':questionId,
+                'value' : document.querySelector('input[name="ideabox-answer"]:checked').value,
+                'userId' : userId
+            };
+            xhr.send(JSON.stringify(data));
+            document.getElementById('ideabox').innerHTML = "Merci d'avoir répondu !";
+        }
+
+        function copy(){
+            var str = document.getElementById("tocopy").innerText;
+            try {
+                // Exécution de la commande de copie
+                result = navigator.clipboard.writeText(str);
+                if (result) {
+                    document.getElementById("btnCopy").classList.add("is-success");
+                    document.getElementById("btnCopy").innerText="Copié !";
+                }
+            } catch(err) {
+                // Une erreur est surevnue lors de la tentative de copie
+                alert(err);
+            }
+        }
     </script>
+
+    <script th:if="${session.user}" th:text="${'getQuestionWithUserId('+session.user.id+')'}">
+    </script>
+
+    <script th:if="!${session.user}">
+        getQuestion()
+    </script>
+
     <style>
         #ideabox-container
         {

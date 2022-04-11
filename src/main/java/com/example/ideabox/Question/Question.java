@@ -43,4 +43,8 @@ public abstract class Question {
     public void setSentence(String sentence) {
         this.sentence = sentence;
     }
+
+    public boolean equals(Question q){
+        return this.getId() == q.getId();
+    }
 }

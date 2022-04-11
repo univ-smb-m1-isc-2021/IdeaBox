@@ -34,7 +34,12 @@ public class Api {
 
     @GetMapping("/api/{token}/getQuestion")
     public String getQuestion(@PathVariable String token, @RequestParam(required = false, defaultValue = "", value="userId") String userId){
-        Question q = questionService.getAnyQuestionByCampaign(applicationService.findApplicationByToken(token).getCampaign());
+        Question q;
+        if(!userId.equals("")){
+            q = questionService.getAnyQuestionByCampaignWithUser(applicationService.findApplicationByToken(token).getCampaign(),userId);
+        } else {
+            q = questionService.getAnyQuestionByCampaign(applicationService.findApplicationByToken(token).getCampaign());
+        }
         if(q == null){
             return "";
         }
@@ -58,9 +63,18 @@ public class Api {
                 .append("<div id='ideabox-buttons'>")
                 .append("<button id='ideabox-close' onclick='closeIdeabox()'>")
                 .append("Fermer")
-                .append("</button>")
-                .append("<button id='ideabox-validate' onclick='giveIdeaboxAnswer("+q.getId()+")'>")
-                .append("Répondre")
+                .append("</button>");
+        if(!userId.equals("")){
+            res.append("<button id='ideabox-validate' onclick='giveIdeaboxAnswerWithUser(")
+                    .append(q.getId())
+                    .append(","+userId)
+                    .append(")'>");
+        } else {
+            res.append("<button id='ideabox-validate' onclick='giveIdeaboxAnswer(")
+                    .append(q.getId())
+                    .append(")'>");
+        }
+        res.append("Répondre")
                 .append("</button>")
                 .append("</div>")
                 .append("</div>");
